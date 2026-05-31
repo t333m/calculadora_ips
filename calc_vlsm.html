@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IPs</title>
+    <link rel="icon" href="imagenes/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="app.js"></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header id="encabezado-principal">
+        <nav class="navbar">
+            <div class="logo"><img src="imagenes/logo.png" alt=""></div>
+
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+            <label for="menu-toggle" class="menu-icono">
+                <span class="linea"></span>
+                <span class="linea"></span>
+                <span class="linea"></span>
+            </label>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="calc_cidr.html">Calculadora CIDR</a></li>
+                <li><a href="calc_vlsm.html">Calculadora VLSM</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="contenido-central">
+
+        <!-- HERO SECTION (100vh) -->
+        <section id="hero" class="hero-section">
+            <form class="row g-5 align-items-center">
+                <div class="col-auto">
+                    <div class="mb-3">
+                        <label for="ipred" class="form-label">IP de red:</label>
+                        <input type="text" class="form-control" id="ipred"
+                            placeholder="192.168.1.0">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="mb-3">
+                        <label for="mascara" class="form-label">Máscara de subred:</label>
+                        <input type="text" class="form-control" id="mascara"
+                            placeholder="255.255.255.0 o /24">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="mb-3">
+                        <label for="cantidad" class="form-label">Cantidad de Subredes:</label>
+                        <input type="number" class="form-control" id="cantidad"
+                            placeholder="# de subredes">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary mb-3" onclick="calcular()">Calcular</button>
+                    </div>
+                </div>
+            </form>
+            <div class="card shadow mt-4">
+            <div class="card-body">
+                <h4 class="card-title text-secondary mb-3">Resultados</h4>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th># Subred</th>
+                                <th>Mascara CIDR</th>
+                                <th>Dirección de Red</th>
+                                <th>Primera IP Útil</th>
+                                <th>Última IP Útil</th>
+                                <th>Broadcast</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">Ingresa los datos y presiona calcular.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer id="pie-de-pagina" class="footer-oscuro">
+        <div class="about-us">
+            <h3>Esperamos que le guste la calculadora profesor</h3>
+            <p>EQUIPO: Erick Tello, Raul Compaired, Victor Marcial</p>
+        </div>
+
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function calcular() {
+            // 1. Obtenemos los valores de los inputs de Bootstrap
+            let ip = document.getElementById("ipred").value;
+            let mascara = document.getElementById("mascara").value;
+            let nredes = document.getElementById("cantidad").value;
+
+            // Validación rápida para que no mande vacíos
+            if (!ip || !mascara || !nredes) {
+                alert("Por favor, llena todos los campos.");
+                return;
+            }
+
+            // 2. Armamos el arreglo y lo pasamos a JSON (como lo programamos en Java)
+            let datosParaJava = [ip, mascara, nredes];
+            let jsonEntrada = JSON.stringify(datosParaJava);
+
+            try {
+                // 3. ¡LLAMAMOS AL MOTOR DE JAVA!
+                let jsonRespuesta = pedirDatosAJava(jsonEntrada);
+
+                // 4. Convertimos la respuesta JSON en una matriz de JavaScript
+                let matrizResultados = JSON.parse(jsonRespuesta);
+                llenarTabla(matrizResultados);
+                
+            } catch (error) {
+                console.error("Error al procesar en WebAssembly/TeaVM:", error);
+                alert("Hubo un error en el cálculo. Revisa la consola.");
+            }
+        }
+
+        function llenarTabla(matriz) {
+            let tbody = document.getElementById("cuerpoTabla");
+            
+            tbody.innerHTML = "";
+
+            // Recorremos la matriz fila por fila
+            for (let i = 0; i < matriz.length; i++) {
+                // Creamos una nueva fila (Table Row - tr)
+                let filaHTML = "<tr>";
+                
+                // Recorremos las columnas de esa fila
+                for (let j = 0; j < matriz[i].length; j++) {
+                    // Agregamos una celda (Table Data - td) con el valor de Java
+                    filaHTML += "<td>" + matriz[i][j] + "</td>";
+                }
+                
+                // Cerramos la fila
+                filaHTML += "</tr>";
+                
+                // Inyectamos la fila armada en el cuerpo de la tabla
+                tbody.innerHTML += filaHTML;
+            }
+        }
+    </script>
+</body>
+</html>

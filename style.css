@@ -1,0 +1,297 @@
+/* Reseteo general */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    background-color: #ffffff;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- NAVBAR --- */
+#encabezado-principal {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    position: fixed; /* Fijo en la parte superior */
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.logo img{
+  width: 17%;
+  height: auto;
+  
+}
+
+.menu-checkbox, .menu-icono { display: none; }
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666666;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover { color: #000000; }
+
+/* --- HERO SECTION (100vh) --- */
+.hero-section {
+    min-height: 90vh;
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+    margin-top: 30vh; /* Compensar la altura del navbar fijo */
+}
+
+.texto-hero {
+    font-size: 4rem;
+    font-weight: 300;
+    color: #111111;
+    text-align: center;
+}
+.palabra-hero {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: #111111;
+    text-align: center;
+}
+/* parte del boton*/
+
+/* --- BOTÓN "HOLA" --- */
+.btn-hola {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 4px; /* Bordes ligeramente redondeados para mantener la elegancia */
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px; /* Separación del elemento superior */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Configuración de la animación de aparición */
+    opacity: 0; /* Empieza invisible */
+    animation: aparicionBoton 1s ease-out 6.3s forwards; 
+}
+
+
+
+.boton{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-hola:hover {
+    transform: translateY(-6px); /* Lo mueve 6 píxeles hacia arriba */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra suave para dar profundidad */
+}
+
+@keyframes aparicionBoton {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Inicia 20px más abajo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su posición normal */
+    }
+}
+
+
+
+/* --- FOOTER --- */
+#pie-de-pagina {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 50px 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.about-us h3 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.about-us p {
+    color: #a0a0a0;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+/* --- REDES SOCIALES EN FOOTER --- */
+.redes-sociales {
+    margin-top: 40px; /* Separación con el texto de "Acerca de nosotros" */
+}
+
+.redes-sociales h4 {
+    font-weight: 300; /* Mantiene la letra delgada */
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    color: #cccccc;
+}
+
+/* --- SECCIÓN QUIÉNES SOMOS --- */
+.seccion-quienes-somos {
+    padding: 80px 20px;
+    text-align: center;
+    max-width: 800px; /* Limita el ancho para que la lectura sea cómoda */
+    margin: 0 auto;   /* Centra el contenedor en la pantalla */
+}
+
+.seccion-quienes-somos h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #111111;
+}
+
+h1  {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #111111;
+}
+
+.seccion-quienes-somos .texto-normal {
+    font-size: 1.1rem;
+    color: #555555;
+    line-height: 1.8;
+    margin-bottom: 30px; /* Separación antes de la frase destacada */
+    
+}
+
+/* El estilo especial para resaltar la frase final */
+.frase-destacada {
+    font-size: 1.3rem;
+    font-weight: 600; /* Hace la letra más gruesa */
+    color: #111111; /* Negro puro para destacar */
+    font-style: italic; /* Letra cursiva para darle un toque diferente */
+    line-height: 1.6;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    /* Línea gris elegante encima de la frase */
+    border-top: 1px solid #e0e0e0; 
+
+    border-bottom: 1px solid #e0e0e0; 
+    
+    /* Centrar la línea superior (ya que el contenedor podría ser más ancho que la frase) */
+    width: 80%;
+    margin: 0 auto; 
+}
+
+.iconos-redes {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Espacio entre los iconos */
+}
+
+.iconos-redes .icono {
+    color: #ffffff; /* El currentColor del SVG tomará este valor */
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: inline-flex;
+}
+
+/* Efecto Hover para los iconos */
+.iconos-redes .icono:hover {
+    color: #888888; /* Se vuelve un gris elegante */
+    transform: translateY(-4px); /* Pequeño salto hacia arriba */
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .navbar { padding: 15px 20px; }
+    
+    .texto-hero { font-size: 2.2rem; }
+    
+    /* Configuración menú móvil */
+    .menu-icono {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 25px;
+        height: 18px;
+        cursor: pointer;
+        z-index: 101;
+    }
+    
+    .menu-icono .linea {
+        height: 2px;
+        width: 100%;
+        background-color: #333;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 100%;
+        background-color: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        gap: 20px;
+        border-bottom: 1px solid #e0e0e0;
+        transition: left 0.4s ease;
+    }
+    
+    .menu-checkbox:checked ~ .nav-links { left: 0; }
+    .menu-checkbox:checked ~ .menu-icono .linea:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-checkbox:checked ~ .menu-icono .linea:nth-child(2) { opacity: 0; }
+    .menu-checkbox:checked ~ .menu-icono .linea:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Adaptación de Cards a Móvil */
+    .card-material { flex-direction: column; text-align: center; }
+    .img-cuadrada { width: 100%; height: 200px; }
+
+    /* Adaptación Slider */
+    .slide { height: 300px; }
+    
+    /* Cotización */
+    .card-cotizacion { padding: 30px 20px; }
+    .card-cotizacion h2 { font-size: 1.5rem; }
+}
